@@ -9,7 +9,7 @@ def health_check(request):
         "status": "ok",
         "message": "backend ishlayapti",
         # Saytdagi kod yangilanganini tekshirish uchun: har yangi zipda shu yozuv o'zgaradi.
-        "version": "2026-11-07 Buxoro olimpiadasi, test yuklash, sekret",
+        "version": "2026-11-08 Buxoro olimpiadasi, pochemuchka, matematika 1-11, arab tili",
     })
 
 
