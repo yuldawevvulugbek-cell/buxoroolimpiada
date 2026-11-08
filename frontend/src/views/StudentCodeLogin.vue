@@ -199,7 +199,7 @@ async function register() {
       phone2: reg.phone2,
       level: reg.level,
     })
-    // Kod o'quvchiga ko'rsatilmaydi, faqat testni ochish uchun ichkarida ishlatiladi.
+    // Kod test sahifasining tepasida ko'rsatiladi: chiqib ketsa /code sahifasida shu kod bilan davom ettiradi.
     const finalCode = res.data.code
     const start = await api.post('/exam/start/', { code: finalCode })
     sessionStorage.setItem('exam_payload', JSON.stringify({ ...start.data, code: finalCode }))

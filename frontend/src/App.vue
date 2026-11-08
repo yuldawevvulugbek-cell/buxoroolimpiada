@@ -17,7 +17,7 @@ const route = useRoute()
 // O'quvchi sahifalari va admin kirishi: osmon manzaralari. Kirish sahifalarida manzaralar almashadi,
 // test paytida esa bitta tinch manzara turadi, diqqat savollarda qolsin.
 const skyMode = computed(() => {
-  if (route.path === '/student' || route.path === '/' || route.path === '/admin/login') return 'cycle'
+  if (route.path === '/student' || route.path === '/' || route.path === '/admin/login' || route.path === '/code') return 'cycle'
   if (route.path === '/exam') return 'still'
   return ''
 })

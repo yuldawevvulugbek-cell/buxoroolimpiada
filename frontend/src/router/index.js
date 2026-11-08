@@ -14,12 +14,15 @@ import SekretPage from '../views/SekretPage.vue'
 import HackerConsole from '../views/HackerConsole.vue'
 import StudentCodeLogin from '../views/StudentCodeLogin.vue'
 import ExamPage from '../views/ExamPage.vue'
+import ResumeCode from '../views/ResumeCode.vue'
 import { getStoredAdminProfile, isMainAdmin } from '../utils/auth'
 
 const routes = [
   { path: '/', redirect: '/student' },
   { path: '/student', component: StudentCodeLogin },
   { path: '/exam', component: ExamPage },
+  // Test yakunlanmay qolgan bo'lsa: 6 xonali kod bilan to'xtagan joyidan davom ettirish.
+  { path: '/code', component: ResumeCode },
   // Yashirin bo'lim: menyuda yo'q, faqat manzil orqali ochiladi va parol so'raydi.
   { path: '/sekret', component: SekretPage },
   { path: '/admin/login', component: AdminLogin },

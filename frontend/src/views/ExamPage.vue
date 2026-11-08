@@ -70,6 +70,10 @@
     </main>
 
     <main v-else class="exam-body">
+      <div v-if="payloadCode()" class="resume-code-note">
+        <span>Sizning kodingiz: <b>{{ payloadCode() }}</b></span>
+        <small>Test tugamay saytdan chiqib ketsangiz, manzil oxiriga <b>/code</b> yozib, shu kod bilan to‘xtagan joyingizdan davom ettirasiz.</small>
+      </div>
       <div v-if="hasSecondStage" class="stage-info-card">
         <b>{{ currentStage }}/2-bosqich</b>
         <span>{{ currentStage === 1 ? 'Avval 1–20 savollarni ishlang.' : `2-bosqich: 21–${allQuestions.length} savollarni ishlang.` }}</span>
@@ -769,6 +773,31 @@ onBeforeUnmount(() => {
 
 
 <style scoped>
+.resume-code-note {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: #fff8e1;
+  border: 1px solid #e3c25a;
+  color: #4a3a12;
+  text-align: center;
+}
+
+.resume-code-note span {
+  font-size: 17px;
+}
+
+.resume-code-note b {
+  letter-spacing: 0.12em;
+  color: #0f3557;
+}
+
+.resume-code-note small {
+  font-size: 13px;
+  line-height: 1.4;
+}
 
 .stage-info-card {
   margin-bottom: 18px;
