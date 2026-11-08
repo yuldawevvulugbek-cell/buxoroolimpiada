@@ -441,7 +441,7 @@ onMounted(async () => {
 }
 
 .certificate-modal {
-  width: min(900px, calc(100vw - 32px));
+  width: min(1160px, calc(100vw - 24px));
 }
 
 .certificate-modal :deep(.secondary-btn) {

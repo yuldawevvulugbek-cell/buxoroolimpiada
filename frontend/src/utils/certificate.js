@@ -57,23 +57,46 @@ function formatPercent(value) {
   return Number.isInteger(number) ? String(number) : number.toFixed(1)
 }
 
-// Ism kengligini harflar bo'yicha taxmin qiladi (bosh harflar kengroq) va
-// ism ramkaga sig'adigan shrift o'lchamini tanlaydi: uzun ism avtomatik kichrayadi.
-const NAME_MAX_WIDTH = 780
+// Ism ramkadan chiqib ketmasligi uchun: avval brauzerning o'zida shu shrift bilan
+// haqiqiy kenglik o'lchanadi (canvas), bo'lmasa harflar bo'yicha taxmin qilinadi.
+// Juda uzun ism eng kichik o'lchamda ham sig'masa, textLength bilan siqiladi.
+const NAME_MAX_WIDTH = 760
+const NAME_MAX_SIZE = 86
+const NAME_MIN_SIZE = 30
+const NAME_FONT = "Georgia, 'Times New Roman', serif"
 
 function nameEm(name) {
   let em = 0
   for (const ch of String(name || '')) {
     if (ch === ' ') em += 0.3
-    else if (/[A-ZА-ЯЁЎҚҒҲ]/.test(ch)) em += 0.72
-    else if (/[a-zа-яёўқғҳ]/.test(ch)) em += 0.52
-    else em += 0.4
+    else if (/[A-ZА-ЯЁЎҚҒҲ]/.test(ch)) em += 0.78
+    else if (/[a-zа-яёўқғҳ]/.test(ch)) em += 0.56
+    else em += 0.45
   }
   return Math.max(em, 1)
 }
 
-function nameSize(name) {
-  return Math.max(24, Math.min(86, Math.floor(NAME_MAX_WIDTH / nameEm(name))))
+let measureCtx = null
+function measureName(name, size) {
+  try {
+    if (typeof document === 'undefined') return null
+    if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d')
+    if (!measureCtx) return null
+    measureCtx.font = `italic 700 ${size}px ${NAME_FONT}`
+    const width = measureCtx.measureText(String(name || '')).width
+    return width > 0 ? width : null
+  } catch {
+    return null
+  }
+}
+
+function nameLayout(name) {
+  const measured = measureName(name, 100)
+  // 6% zaxira: SVG va canvas shriftni sal boshqacha chizishi mumkin
+  const perPx = measured ? (measured * 1.06) / 100 : nameEm(name)
+  const size = Math.max(NAME_MIN_SIZE, Math.min(NAME_MAX_SIZE, Math.floor(NAME_MAX_WIDTH / perPx)))
+  const width = perPx * size
+  return { size, squeeze: width > NAME_MAX_WIDTH }
 }
 
 function fitSize(text, base, maxWidth, ratio = 0.6) {
@@ -149,6 +172,7 @@ export function certificateSvg(cert, photo = photoData) {
     ? `<image href="${photo}" x="${archX}" y="${archY}" width="${archW}" height="${archH}" preserveAspectRatio="xMidYMid slice" clip-path="url(#archClip)"/>`
     : `<path d="${arch}" fill="url(#skyFallback)"/>`
 
+  const nameFit = nameLayout(cert.full_name)
   const subjSize = fitSize(cert.subject_name, 32, 330, 0.62)
   const levelSize = fitSize(cert.level_name, 32, 330, 0.62)
 
@@ -237,7 +261,7 @@ export function certificateSvg(cert, photo = photoData) {
     <circle r="5" fill="#0f7d8f"/>
   </g>
   <text x="${cx}" y="446" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-style="italic" fill="#6b5634">Ushbu sertifikat faxr bilan topshiriladi</text>
-  <text x="${cx}" y="${540 + (86 - nameSize(cert.full_name)) / 3}" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="${nameSize(cert.full_name)}" fill="#0f3557" font-weight="700" font-style="italic">${name}</text>
+  <text x="${cx}" y="${540 + (NAME_MAX_SIZE - nameFit.size) / 3}" text-anchor="middle" font-family="${NAME_FONT}" font-size="${nameFit.size}" fill="#0f3557" font-weight="700" font-style="italic"${nameFit.squeeze ? ` textLength="${NAME_MAX_WIDTH}" lengthAdjust="spacingAndGlyphs"` : ''}>${name}</text>
   <rect x="${cx - 360}" y="572" width="720" height="3" fill="url(#gold)"/>
   ${star(cx - 372, 573.5, 8, '#c9a23d')}${star(cx + 372, 573.5, 8, '#c9a23d')}
 
