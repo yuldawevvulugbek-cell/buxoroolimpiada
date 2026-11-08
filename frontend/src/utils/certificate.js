@@ -254,7 +254,7 @@ export function certificateSvg(cert, photo = photoData) {
     ${star(0, 0, 20, '#c9a23d')}${star(0, 0, 9, '#0f7d8f')}
     ${star(-40, 0, 7, '#0f7d8f')}${star(40, 0, 7, '#0f7d8f')}
   </g>
-  <text x="${cx}" y="226" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="9" fill="#0f7d8f" font-weight="700">BUXORO RESPUBLIKA OLIMPIADASI</text>
+  <text x="${cx}" y="226" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="5" fill="#0f7d8f" font-weight="700">BUXORO 2026 RESPUBLIKA OCHIQ OLIMPIADASI</text>
   <text x="${cx}" y="346" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="104" letter-spacing="12" fill="url(#gold)" font-weight="700" stroke="#8a6a16" stroke-width="0.8">SERTIFIKAT</text>
   <g transform="translate(${cx} 384)">
     <path d="M-200 0 Q-100 -14 0 0 Q100 14 200 0" fill="none" stroke="#c9a23d" stroke-width="2"/>
@@ -265,8 +265,8 @@ export function certificateSvg(cert, photo = photoData) {
   <rect x="${cx - 360}" y="572" width="720" height="3" fill="url(#gold)"/>
   ${star(cx - 372, 573.5, 8, '#c9a23d')}${star(cx + 372, 573.5, 8, '#c9a23d')}
 
-  <text x="${cx}" y="636" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#3d3424">Buxoro Respublika olimpiadasida ishtirok etib,</text>
-  <text x="${cx}" y="680" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="29" fill="#3d3424">${lineReason}</text>
+  <text x="${cx}" y="636" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="27" fill="#3d3424">Buxoro 2026 Respublika ochiq olimpiadasida ishtirok etib,</text>
+  <text x="${cx}" y="680" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="27" fill="#3d3424">${lineReason}</text>
 
   <g transform="translate(${cx - 395} 718)">
     <rect width="380" height="96" rx="14" fill="#ffffff" fill-opacity="0.75" stroke="#c9a23d" stroke-width="1.5"/>
@@ -286,9 +286,14 @@ export function certificateSvg(cert, photo = photoData) {
     <rect x="${cx - 400}" y="938" width="220" height="2" fill="#8a7650"/>
     <text x="${cx - 290}" y="970" text-anchor="middle" font-size="20" letter-spacing="3">SANA</text>
 
-    <path d="M${cx + 200} 918 c18 -34 34 -34 30 -6 c-4 24 14 22 26 -4 c10 -22 22 -20 22 0 c0 16 14 14 30 -6 c10 -12 22 -10 34 -2" fill="none" stroke="#0f3557" stroke-width="2.4" stroke-linecap="round"/>
-    <rect x="${cx + 180}" y="938" width="220" height="2" fill="#8a7650"/>
-    <text x="${cx + 290}" y="970" text-anchor="middle" font-size="20" letter-spacing="3">TASHKILIY QO‘MITA</text>
+    <g fill="none" stroke="#1d3f8f" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M${cx + 166} 920 c6 -30 14 -54 27 -58 c11 -3 6 21 -6 45 c-8 16 -10 29 -2 25 c10 -5 18 -27 27 -25 c6 2 -2 19 4 19 c8 0 14 -17 23 -17 c6 0 2 15 8 15 c10 0 16 -21 27 -21 c8 0 4 17 12 17 c13 0 23 -15 36 -22" stroke-width="2.6"/>
+      <path d="M${cx + 174} 892 c15 -4 32 -5 47 -2" stroke-width="2.2"/>
+      <path d="M${cx + 156} 930 c52 -11 124 -13 196 -6 c10 1 16 -5 9 -9" stroke-width="1.8" stroke-opacity="0.85"/>
+    </g>
+    <rect x="${cx + 120}" y="938" width="260" height="2" fill="#8a7650"/>
+    <text x="${cx + 250}" y="966" text-anchor="middle" font-size="15" letter-spacing="2">TASHKILIY QO‘MITA RAHBARI</text>
+    <text x="${cx + 250}" y="1000" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="700" font-style="italic" fill="#0f3557">Abdurahmanova Farida</text>
 
     <text x="${cx - 290}" y="1008" text-anchor="middle" font-size="18" letter-spacing="2" fill="#8a7650">№ ${esc(cert.number)}</text>
   </g>

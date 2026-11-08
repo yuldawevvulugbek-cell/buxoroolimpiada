@@ -77,8 +77,8 @@
 
       <template v-for="item in visibleQuestions" :key="item.q.id">
       <div v-if="item.showPassage" class="question-card passage-card">
-        <p class="passage-label">Read the text and answer the questions.</p>
-        <p class="passage-text">{{ item.q.passage }}</p>
+        <p class="passage-label">{{ passageLabel }}</p>
+        <p class="passage-text" dir="auto">{{ item.q.passage }}</p>
       </div>
       <div class="question-card" :data-qid="item.q.id">
         <h3 class="question-text">{{ item.number }}. <span v-html="mathHtml(item.q.text)"></span></h3>
@@ -296,6 +296,11 @@ function writeAnswer(questionId, value) {
 function isAnswered(q) {
   return Boolean(String(answers[q.id] || '').trim())
 }
+
+// Ingliz tili matnlarida inglizcha, boshqa fanlarda (masalan Arab tili) o'zbekcha ko'rsatma.
+const passageLabel = computed(() => (/ingliz|english/i.test(payload.value?.student?.subject_name || '')
+  ? 'Read the text and answer the questions.'
+  : 'Matnni o‘qing va savollarga javob bering.'))
 
 function optionList(q) {
   return [
